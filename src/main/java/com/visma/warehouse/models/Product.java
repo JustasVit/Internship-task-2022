@@ -49,13 +49,13 @@ public class Product {
     public void setPrice(BigDecimal price) {
         if(price.compareTo(BigDecimal.ZERO) == 1) {
             this.price = price;
-        }
+        } else throw new IllegalArgumentException("Product price must be bigger than 0!");
     }
 
     public void setQuantity(int quantity) {
         if(quantity >= 0) {
             this.quantity = quantity;
-        }
+        } else throw new IllegalArgumentException("Product quantity can't be negative!");
     }
 
     @Override
