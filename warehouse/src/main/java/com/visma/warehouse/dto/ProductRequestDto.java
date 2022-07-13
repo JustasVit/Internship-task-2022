@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequestDto {
+
     @NonNull
     private long id;
 

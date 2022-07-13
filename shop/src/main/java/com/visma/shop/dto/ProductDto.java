@@ -1,6 +1,6 @@
-package com.visma.warehouse.dto;
+package com.visma.shop.dto;
 
-import com.visma.warehouse.models.Product;
+import com.visma.shop.models.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductDto {
 
+    @NonNull
     private long id;
 
     @NonNull
@@ -25,12 +26,4 @@ public class ProductDto {
 
     @NonNull
     private int quantity;
-
-    public ProductDto(Product product){
-        this.id = product.getId();
-        this.name = product.getName();
-        this.description = product.getDescription();
-        this.price = product.getPrice();
-        this.quantity = product.getQuantity();
-    }
 }

@@ -1,4 +1,4 @@
-package com.visma.warehouse.dto;
+package com.visma.shop.dto;
 
 import lombok.*;
 
@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequestDto {
+
     @NonNull
     private long id;
 

@@ -1,4 +1,4 @@
-package com.visma.warehouse.models;
+package com.visma.shop.models;
 
 import lombok.*;
 import java.math.BigDecimal;

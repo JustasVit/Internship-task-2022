@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ProductDto {
 
+    @NonNull
     private long id;
 
     @NonNull
@@ -26,11 +27,4 @@ public class ProductDto {
     @NonNull
     private int quantity;
 
-    public ProductDto(Product product){
-        this.id = product.getId();
-        this.name = product.getName();
-        this.description = product.getDescription();
-        this.price = product.getPrice();
-        this.quantity = product.getQuantity();
-    }
 }
