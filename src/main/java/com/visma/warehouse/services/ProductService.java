@@ -1,13 +1,10 @@
 package com.visma.warehouse.services;
 
 import com.visma.warehouse.dto.ProductDto;
-import com.visma.warehouse.models.Product;
-
 import java.util.List;
-
 public interface ProductService {
-    List<Product> getAllProducts();
+    List<ProductDto> getAllProducts();
 
-    Product buyProduct(long id, int quantity);
+    ProductDto buyProduct(long id, int quantity);
 
 }

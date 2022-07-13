@@ -1,8 +1,6 @@
 package com.visma.warehouse.models;
 
-import com.visma.warehouse.dto.ProductDto;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -30,20 +28,8 @@ public class Product {
         this.id = id;
         this.name = name;
         this.description = description;
-        if(price.compareTo(BigDecimal.ZERO) == 1){
-            this.price = price;
-        } else throw new IllegalArgumentException("Product price must be bigger than 0!");
-        if(quantity >= 0){
-            this.quantity = quantity;
-        } else throw new IllegalArgumentException("Product quantity can't be negative!");
-    }
-
-    public Product(ProductDto productDto){
-        this.id = productDto.getId();
-        this.name = productDto.getName();
-        this.description = productDto.getDescription();
-        this.price = productDto.getPrice();
-        this.quantity = productDto.getQuantity();
+        setPrice(price);
+        setQuantity(quantity);
     }
 
     public void setPrice(BigDecimal price) {
