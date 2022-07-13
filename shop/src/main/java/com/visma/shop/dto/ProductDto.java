@@ -1,29 +1,28 @@
 package com.visma.shop.dto;
 
-import com.visma.shop.models.Product;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
-
+import lombok.*;
 import java.math.BigDecimal;
 
 @Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductDto {
 
     @NonNull
     private long id;
 
     @NonNull
+    @Setter
     private String name;
 
+    @Setter
     private String description;
 
     @NonNull
+    @Setter
     private BigDecimal price;
 
     @NonNull
+    @Setter
     private int quantity;
 }

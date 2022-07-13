@@ -1,12 +1,11 @@
-package com.visma.warehouse.dto;
+package com.visma.shop.dto;
 
 import lombok.*;
-import java.math.BigDecimal;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class ShopDto {
 
     @NonNull
     private long id;
@@ -15,15 +14,11 @@ public class ProductDto {
     @Setter
     private String name;
 
+    @NonNull
     @Setter
-    private String description;
+    private String address;
 
     @NonNull
     @Setter
-    private BigDecimal price;
-
-    @NonNull
-    @Setter
-    private int quantity;
-
+    private String phoneNumber;
 }

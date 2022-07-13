@@ -3,7 +3,6 @@ package com.visma.warehouse.dto;
 import lombok.*;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequestDto {
@@ -12,5 +11,6 @@ public class ProductRequestDto {
     private long id;
 
     @NonNull
+    @Getter
     private int quantity;
 }
