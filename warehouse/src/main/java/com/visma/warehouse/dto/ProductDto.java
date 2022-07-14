@@ -4,6 +4,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
@@ -12,18 +13,14 @@ public class ProductDto {
     private long id;
 
     @NonNull
-    @Setter
     private String name;
 
-    @Setter
     private String description;
 
     @NonNull
-    @Setter
     private BigDecimal price;
 
     @NonNull
-    @Setter
     private int quantity;
 
 }
