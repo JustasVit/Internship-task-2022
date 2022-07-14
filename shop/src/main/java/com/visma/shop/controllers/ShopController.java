@@ -1,7 +1,6 @@
 package com.visma.shop.controllers;
 
 import com.visma.shop.dto.ProductDto;
-import com.visma.shop.dto.ProductRequestDto;
 import com.visma.shop.services.WarehouseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +20,8 @@ public class ShopController {
         return ResponseEntity.ok(warehouseService.getAllProducts());
     }
 
-    @PostMapping
-    public ResponseEntity<ProductDto> buyProduct(@RequestBody ProductRequestDto productRequestDto){
-        return ResponseEntity.ok(warehouseService.buyProduct(productRequestDto.getId(), productRequestDto.getQuantity()));
+    @PostMapping("/product/{id}/sell/{quantity}")
+    public ResponseEntity<ProductDto> buyProduct(@PathVariable long id, @PathVariable int quantity){
+        return ResponseEntity.ok(warehouseService.buyProduct(id, quantity));
     }
 }

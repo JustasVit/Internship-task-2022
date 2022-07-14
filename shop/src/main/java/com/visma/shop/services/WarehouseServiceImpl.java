@@ -1,7 +1,6 @@
 package com.visma.shop.services;
 
 import com.visma.shop.dto.ProductDto;
-import com.visma.shop.dto.ProductRequestDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,8 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     public ProductDto buyProduct(long id, int quantity) {
         return restTemplate.postForObject(
-                String.format("%s/api/products", warehouseBaseUrl),
-                new ProductRequestDto(id, quantity),
+                String.format("%s/api/products/product/%d/retrieve/%d", warehouseBaseUrl,id,quantity),
+                null,
                 ProductDto.class);
     }
 }
