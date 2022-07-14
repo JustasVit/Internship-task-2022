@@ -10,14 +10,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class ShopServiceImpl implements ShopService {
+public class WarehouseServiceImpl implements WarehouseService {
 
     private final RestTemplate restTemplate;
 
     @Value("${warehouse.baseUrl}")
     private String warehouseBaseUrl;
 
-    public ShopServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public WarehouseServiceImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder
                 .basicAuthentication("user", "password")
                 .build();

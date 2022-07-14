@@ -4,7 +4,7 @@ import com.visma.shop.dto.ProductDto;
 
 import java.util.List;
 
-public interface ShopService {
+public interface WarehouseService {
 
     List<ProductDto> getAllProducts();
     ProductDto buyProduct(long id, int quantity);
