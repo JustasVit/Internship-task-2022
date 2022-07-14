@@ -25,6 +25,5 @@ public class ProductTest {
     public void productTest_ShouldPass() {
         Product product = new Product(1, "name", "description", new BigDecimal("1"), 1);
         assertThat(product).isNotNull();
-
     }
 }
