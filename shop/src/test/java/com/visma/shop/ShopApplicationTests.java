@@ -1,4 +1,4 @@
-package com.visma.parent;
+package com.visma.shop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
