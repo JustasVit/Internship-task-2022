@@ -3,3 +3,6 @@ target
 *.iws
 *.iml
 *.ipr
+*.cmd
+*.md
+mvnw
