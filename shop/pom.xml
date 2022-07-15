@@ -45,6 +45,12 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>3.14.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.visma</groupId>
             <artifactId>warehouse-dto</artifactId>
             <version>0.0.1-SNAPSHOT</version>
