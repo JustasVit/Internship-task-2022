@@ -5,4 +5,5 @@ target
 *.ipr
 *.cmd
 *.md
+.mvnw
 mvnw

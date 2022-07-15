@@ -5,8 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.DefaultUriBuilderFactory;
+
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WarehouseServiceImpl implements WarehouseService {
@@ -22,17 +27,28 @@ public class WarehouseServiceImpl implements WarehouseService {
                 .build();
     }
 
+    @PostConstruct
+    public void init(){
+        restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(warehouseBaseUrl));
+    }
+
     public List<ProductDto> getAllProducts() {
         return Arrays.asList(
                 restTemplate.getForObject(
-                        String.format("%s/api/products", warehouseBaseUrl),
+                        "/api/products",
                         ProductDto[].class));
     }
 
     public ProductDto buyProduct(long id, int quantity) {
+
+        Map<String, String> variables = new HashMap<>();
+        variables.put("id", Long.toString(id));
+        variables.put("quantity", Integer.toString(quantity));
+
         return restTemplate.postForObject(
-                String.format("%s/api/products/product/%d/retrieve/%d", warehouseBaseUrl,id,quantity),
+                "/api/products/product/{id}/retrieve/{quantity}",
                 null,
-                ProductDto.class);
+                ProductDto.class,
+                variables);
     }
 }
