@@ -1,7 +1,7 @@
 package com.visma.shop.controllers;
 
-import com.visma.shop.dto.ProductDto;
 import com.visma.shop.services.WarehouseService;
+import com.visma.warehousedto.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,7 @@
-package com.visma.warehouse.dto;
+package com.visma.warehousedto.dto;
 
 import lombok.*;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -22,5 +23,4 @@ public class ProductDto {
 
     @NonNull
     private int quantity;
-
 }

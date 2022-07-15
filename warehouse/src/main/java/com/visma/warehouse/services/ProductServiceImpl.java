@@ -1,7 +1,7 @@
 package com.visma.warehouse.services;
 
-import com.visma.warehouse.dto.ProductDto;
 import com.visma.warehouse.models.Product;
+import com.visma.warehousedto.dto.ProductDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;

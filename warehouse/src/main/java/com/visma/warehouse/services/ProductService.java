@@ -1,6 +1,7 @@
 package com.visma.warehouse.services;
 
-import com.visma.warehouse.dto.ProductDto;
+import com.visma.warehousedto.dto.ProductDto;
+
 import java.util.List;
 public interface ProductService {
     List<ProductDto> getAllProducts();

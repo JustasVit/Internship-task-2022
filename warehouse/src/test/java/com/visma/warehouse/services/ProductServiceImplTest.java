@@ -1,6 +1,6 @@
 package com.visma.warehouse.services;
 
-import com.visma.warehouse.dto.ProductDto;
+import com.visma.warehousedto.dto.ProductDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.NoSuchElementException;

@@ -1,6 +1,6 @@
 package com.visma.shop.services;
 
-import com.visma.shop.dto.ProductDto;
+import com.visma.warehousedto.dto.ProductDto;
 
 import java.util.List;
 

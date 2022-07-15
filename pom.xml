@@ -28,6 +28,7 @@
 
     <modules>
         <module>warehouse</module>
+        <module>warehouse-dto</module>
         <module>shop</module>
     </modules>
 </project>

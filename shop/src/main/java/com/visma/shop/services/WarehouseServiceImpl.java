@@ -1,6 +1,6 @@
 package com.visma.shop.services;
 
-import com.visma.shop.dto.ProductDto;
+import com.visma.warehousedto.dto.ProductDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;

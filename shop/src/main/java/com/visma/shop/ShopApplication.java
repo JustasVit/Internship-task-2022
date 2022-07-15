@@ -8,7 +8,6 @@ import org.springframework.web.client.RestOperations;
 
 @SpringBootApplication
 public class ShopApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ShopApplication.class, args);
     }
