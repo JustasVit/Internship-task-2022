@@ -11,19 +11,19 @@ public class ProductTest {
 
     @Test
     public void productTest_NegativePrice_ShouldThrowException(){
-        assertThatThrownBy(() ->new Product(1,"name","description",new BigDecimal("-8"),1) )
+        assertThatThrownBy(() ->new Product(1,"name","description",new BigDecimal("-8"),1,null) )
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void productTest_NegativeQuantity_ShouldThrowException(){
-        assertThatThrownBy(() ->new Product(1,"name","description",new BigDecimal("1"),-1) )
+        assertThatThrownBy(() ->new Product(1,"name","description",new BigDecimal("1"),-1,null) )
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void productTest_ShouldPass() {
-        Product product = new Product(1, "name", "description", new BigDecimal("1"), 1);
+        Product product = new Product(1, "name", "description", new BigDecimal("1"), 1,null);
         assertThat(product).isNotNull();
     }
 }

@@ -17,17 +17,20 @@ public class ProductServiceImpl implements ProductService {
                     "Samsung smart TV",
                     "Smart TV made by Samsung",
                     new BigDecimal("599.99" ),
-                    10),
+                    10,
+                    null),
             new Product(2,
                     "Gaming laptop \"Lenovo Legion Y530\"",
                     "Gaming laptop made by Lenovo",
                     new BigDecimal("799.99" ),
-                    10),
+                    10,
+                    null),
             new Product(3,
                     "Smartphone \"Apple Iphone Pro Max\", 256GB ",
                     "Smartphone made by Apple",
                     new BigDecimal("999.99" ),
-                    10)
+                    10,
+                    null)
     );
 
     @Override
