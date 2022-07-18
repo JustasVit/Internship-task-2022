@@ -42,12 +42,6 @@ public class SecurityConfigDatabase {
                 .map(this::convertShopToUserDetails)
                 .collect(Collectors.toList());
 
-        UserDetails user = User
-                .withUsername("user")
-                .password("{noop}password")
-                .roles("USER")
-                .build();
-
         return new InMemoryUserDetailsManager(shops);
     }
 
