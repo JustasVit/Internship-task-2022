@@ -3,18 +3,20 @@ package com.visma.warehouse.services;
 import com.visma.warehousedto.dto.ProductDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
+
 import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+@ActiveProfiles("memory")
+public class ProductServiceImplMemoryTest {
 
-public class ProductServiceImplTest {
-
-    private ProductServiceImpl productService;
+    private ProductServiceImplMemory productService;
 
     @BeforeEach
     public void init(){
-        productService = new ProductServiceImpl();
+        productService = new ProductServiceImplMemory();
     }
 
     @Test

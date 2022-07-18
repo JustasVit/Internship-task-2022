@@ -1,12 +1,13 @@
 package com.visma.warehouse.models;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+@ActiveProfiles("memory")
 public class ProductTest {
 
     @Test

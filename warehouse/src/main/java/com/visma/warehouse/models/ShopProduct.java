@@ -12,26 +12,25 @@ import java.time.LocalDateTime;
 @Table(name = "Shop_Product")
 public class ShopProduct {
 
-    @NonNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private Long id;
 
     @Setter
     @ManyToOne
     @JoinColumn(name = "shop_id")
-    Shop shop;
+    private Shop shop;
 
     @Setter
     @ManyToOne
     @JoinColumn(name = "product_id")
-    Product product;
+    private Product product;
 
     @Setter
     @NonNull
-    int quantity;
+    private int quantity;
 
     @Setter
     @NonNull
-    LocalDateTime date;
+    private LocalDateTime date;
 }

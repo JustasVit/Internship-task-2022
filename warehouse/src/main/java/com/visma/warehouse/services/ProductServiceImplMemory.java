@@ -3,6 +3,7 @@ package com.visma.warehouse.services;
 import com.visma.warehouse.models.Product;
 import com.visma.warehousedto.dto.ProductDto;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+@Profile("memory")
+public class ProductServiceImplMemory implements ProductService {
 
     private final List<Product> products = List.of(
             new Product(1,

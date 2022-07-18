@@ -16,7 +16,7 @@ public class Product {
     @NonNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Setter
     @NonNull
