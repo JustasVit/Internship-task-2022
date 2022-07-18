@@ -10,13 +10,13 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ActiveProfiles("memory")
-public class ProductServiceImplMemoryTest {
+public class ProductServiceMemoryImplTest {
 
-    private ProductServiceImplMemory productService;
+    private ProductServiceMemoryImpl productService;
 
     @BeforeEach
     public void init(){
-        productService = new ProductServiceImplMemory();
+        productService = new ProductServiceMemoryImpl();
     }
 
     @Test

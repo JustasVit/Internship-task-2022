@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Profile("memory")
-public class ProductServiceImplMemory implements ProductService {
+public class ProductServiceMemoryImpl implements ProductService {
 
     private final List<Product> products = List.of(
             new Product(1,

@@ -9,10 +9,10 @@ import com.visma.warehouse.repositories.ShopRepository;
 import com.visma.warehousedto.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 @Profile("database")
 @AllArgsConstructor
-public class ProductServiceImplDatabase implements ProductService{
+public class ProductServiceDatabaseImpl implements ProductService{
 
     private ProductRepository productRepository;
     private ShopRepository shopRepository;
@@ -40,18 +40,17 @@ public class ProductServiceImplDatabase implements ProductService{
     @Transactional
     public ProductDto buyProduct(long id, int quantity){
         Shop loggedInShop = getCurrentlyLoggedInShop();
-        Product productToBuy = productRepository.findById(id).get();
+        Product productToBuy = productRepository
+                .findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Product doesn't exist!"));
 
-        if(productToBuy != null) {
+        productToBuy.setQuantity(productToBuy.getQuantity() - quantity);
+        productRepository.save(productToBuy);
 
-            productToBuy.setQuantity(productToBuy.getQuantity() - quantity);
-            productRepository.save(productToBuy);
+        ShopProduct shopProduct = new ShopProduct(null, loggedInShop, productToBuy, quantity, LocalDateTime.now());
+        shopProductRepository.save(shopProduct);
 
-            ShopProduct shopProduct = new ShopProduct(null,loggedInShop,productToBuy,quantity, LocalDateTime.now());
-            shopProductRepository.save(shopProduct);
-
-            return convertToDto(productToBuy);
-        } else throw new NoSuchElementException("Product doesn't exist!");
+        return convertToDto(productToBuy);
     }
 
     private ProductDto convertToDto(Product product){
@@ -72,9 +71,13 @@ public class ProductServiceImplDatabase implements ProductService{
 
         if (principal instanceof UserDetails) {
             String username = ((UserDetails) principal).getUsername();
-            return shopRepository.findShopByUsername(username);
+            return shopRepository
+                    .findShopByUsername(username)
+                    .orElseThrow(() -> new UsernameNotFoundException(username));
         } else {
-            return shopRepository.findShopByUsername(principal.toString());
+            return shopRepository
+                    .findShopByUsername(principal.toString())
+                    .orElseThrow(() -> new UsernameNotFoundException(principal.toString()));
         }
     }
 }
