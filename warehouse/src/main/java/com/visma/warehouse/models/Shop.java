@@ -19,6 +19,7 @@ public class Shop {
 
     @Setter
     @NonNull
+    @Column(unique = true)
     private String username;
 
     @Setter

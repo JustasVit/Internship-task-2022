@@ -20,6 +20,7 @@ public class Product {
 
     @Setter
     @NonNull
+    @Column(unique = true)
     private String name;
 
     @Setter
@@ -30,6 +31,7 @@ public class Product {
 
     @NonNull
     private int quantity;
+
     @Setter
     @OneToMany(mappedBy = "product")
     List<ShopProduct> shopHistory;
