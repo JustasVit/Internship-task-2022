@@ -24,7 +24,9 @@ import java.util.stream.Collectors;
 public class ProductServiceDatabaseImpl implements ProductService{
 
     private ProductRepository productRepository;
+
     private ShopProductRepository shopProductRepository;
+
     private UserSecurityService userSecurityService;
 
     public List<ProductDto> getAllProducts(){
