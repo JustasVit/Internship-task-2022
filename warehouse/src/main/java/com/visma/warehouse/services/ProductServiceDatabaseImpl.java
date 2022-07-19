@@ -42,15 +42,16 @@ public class ProductServiceDatabaseImpl implements ProductService{
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Product doesn't exist!"));
 
-        if(productToBuy.getQuantity() - quantity >= 0){
-            productRepository.updateProductQuantity(
-                    productToBuy.getId(),
-                    productToBuy.getQuantity() - quantity);
+        if(productToBuy.getQuantity() - quantity < 0){
+            throw new IllegalArgumentException("Product quantity can't be negative!");
+        }
 
-            productToBuy.setQuantity(productToBuy.getQuantity() - quantity);
+        productRepository.updateProductQuantity(
+                productToBuy.getId(),
+                productToBuy.getQuantity() - quantity);
 
-        } else throw new IllegalArgumentException("Product quantity can't be negative!");
-
+        productToBuy.setQuantity(productToBuy.getQuantity() - quantity);
+        
         ShopProduct shopProduct = new ShopProduct(
                 null,
                 loggedInShop,
