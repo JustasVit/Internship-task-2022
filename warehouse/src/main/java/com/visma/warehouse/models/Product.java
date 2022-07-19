@@ -1,18 +1,26 @@
 package com.visma.warehouse.models;
 
 import lombok.*;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
+@Entity
 @Getter
+@NoArgsConstructor
+@Table(name = "Product")
 public class Product {
 
     @NonNull
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Setter
     @NonNull
+    @Column(unique = true)
     private String name;
 
     @Setter
@@ -24,12 +32,17 @@ public class Product {
     @NonNull
     private int quantity;
 
-    public Product(long id, String name, String description, BigDecimal price, int quantity){
+    @Setter
+    @OneToMany(mappedBy = "product")
+    List<ShopProduct> shopHistory;
+
+    public Product(long id, String name, String description, BigDecimal price, int quantity, List<ShopProduct> shopHistory){
         this.id = id;
         this.name = name;
         this.description = description;
         setPrice(price);
         setQuantity(quantity);
+        this.shopHistory = shopHistory;
     }
 
     public void setPrice(BigDecimal price) {
