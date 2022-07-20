@@ -22,13 +22,14 @@ import java.util.List;
 @Profile("database")
 public class CsvFileService implements FileService{
 
-    @Value("${file.csv.path}")
-    private String path;
+    @Value("${report.file.path}")
+    String path;
 
-    public void createFile(String filepath, List<ShopProduct> shopProducts) throws IOException {
+    public void createFile(List<ShopProduct> shopProducts) throws IOException {
 
-        String filename = generateFilename();
-        FileWriter fileWriter = new FileWriter(String.format("%s%s",filepath,filename));
+        String filename = generateFilename(LocalDateTime.now());
+        FileWriter fileWriter = new FileWriter(String.format("%s/%s",path,filename));
+
         try (CSVPrinter printer = new CSVPrinter(fileWriter, CSVFormat.DEFAULT)) {
             for(ShopProduct shopProduct : shopProducts){
                 printer.printRecord(
@@ -40,27 +41,23 @@ public class CsvFileService implements FileService{
         }
     }
 
-    public File readFile(LocalDateTime dateTime) throws FileNotFoundException {
+    public File readFile(LocalDateTime dateTime) throws FileNotFoundException{
 
-        String filename =  dateTime
-                .truncatedTo(ChronoUnit.HOURS)
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH"));
-
-        Path filepath = Paths.get(String.format("%s%s.csv", path, filename));
+        String filename = generateFilename(dateTime);
+        Path filepath = Paths.get(String.format("%s/%s",path,filename));
 
         if(!Files.exists(filepath)){
-            throw new FileNotFoundException(String.format("Report file %s was not found!", filename));
+            throw new FileNotFoundException("Report file was not found!");
         }
 
         return filepath.toFile();
     }
 
-    public String generateFilename(){
+    public String generateFilename(LocalDateTime dateTime){
 
         return String.format(
                 "%s.csv",
-                LocalDateTime
-                        .now()
+                dateTime
                         .truncatedTo(ChronoUnit.HOURS)
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH")));
     }

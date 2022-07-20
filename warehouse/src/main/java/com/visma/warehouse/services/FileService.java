@@ -11,5 +11,5 @@ public interface FileService {
 
     File readFile(LocalDateTime dateTime) throws FileNotFoundException;
 
-    void createFile(String filepath, List<ShopProduct> content) throws IOException;
+    void createFile(List<ShopProduct> content) throws IOException;
 }
