@@ -18,8 +18,8 @@ class Scheduler {
 
     private ReportService reportService;
 
-    @Value("${report.interval}")
-    private Integer interval;
+    @Value("${report.interval.hours}")
+    private Integer intervalInHours;
 
     public Scheduler(ReportService reportService){
         this.reportService = reportService;
@@ -27,6 +27,6 @@ class Scheduler {
 
     @Scheduled(cron = "${report.generation.frequency}" )
     private void generateReport() throws IOException {
-        reportService.generateReport(LocalDateTime.now().minusHours(interval), LocalDateTime.now());
+        reportService.generateReport(LocalDateTime.now().minusHours(intervalInHours), LocalDateTime.now());
     }
 }
