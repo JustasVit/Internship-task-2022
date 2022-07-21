@@ -18,12 +18,4 @@ public class WarehouseApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(WarehouseApplication.class, args);
     }
-
-}
-
-@Configuration
-@EnableScheduling
-@ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true)
-class SchedulingConfiguration {
-
 }

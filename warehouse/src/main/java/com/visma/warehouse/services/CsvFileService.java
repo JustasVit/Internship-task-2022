@@ -55,11 +55,8 @@ public class CsvFileService implements FileService{
 
     public String generateFilename(LocalDateTime dateTime){
 
-        return String.format(
-                "%s.csv",
-                dateTime
-                        .truncatedTo(ChronoUnit.HOURS)
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH")));
+        return dateTime.truncatedTo(ChronoUnit.HOURS)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH'.csv'"));
     }
 
 }

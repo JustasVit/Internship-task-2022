@@ -3,12 +3,9 @@ package com.visma.warehouse.services;
 import com.visma.warehouse.models.ShopProduct;
 import com.visma.warehouse.repositories.ShopProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -22,12 +19,16 @@ public class CsvReportServiceImpl implements ReportService {
 
     private FileService fileService;
 
-    @Scheduled(cron = "0 0 0-23 * * *")
-    public void generateScheduledReport() throws IOException {
+    public void generateScheduledReport(LocalDateTime startDate, LocalDateTime endDate) throws IOException {
+
+        if(startDate.isAfter(endDate)){
+            throw new IllegalArgumentException("Starting date is after ending date!");
+        }
+
         List<ShopProduct> shoppingHistory = shopProductRepository
                 .findAllByDateBetween(
-                        LocalDateTime.now().minusHours(1).truncatedTo(ChronoUnit.HOURS),
-                        LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
+                        startDate.truncatedTo(ChronoUnit.HOURS),
+                        endDate.truncatedTo(ChronoUnit.HOURS));
 
         fileService.createFile(shoppingHistory);
     }
