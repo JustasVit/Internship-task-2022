@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 @Profile("database")
-public class CsvFileService implements FileService{
+public class CsvReportFileService implements ReportFileService {
 
     @Value("${report.file.path}")
     String path;

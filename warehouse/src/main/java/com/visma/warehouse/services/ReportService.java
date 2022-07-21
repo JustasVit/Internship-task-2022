@@ -5,5 +5,5 @@ import java.time.LocalDateTime;
 
 public interface ReportService {
 
-    void generateScheduledReport(LocalDateTime startDate, LocalDateTime endDate) throws IOException;
+    void generateReport(LocalDateTime startDate, LocalDateTime endDate) throws IOException;
 }

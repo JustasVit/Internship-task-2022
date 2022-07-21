@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface FileService {
+public interface ReportFileService {
 
     File readFile(LocalDateTime dateTime) throws FileNotFoundException;
 

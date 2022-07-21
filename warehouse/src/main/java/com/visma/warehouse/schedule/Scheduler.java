@@ -3,6 +3,7 @@ package com.visma.warehouse.schedule;
 import com.visma.warehouse.services.ReportService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Component
 @EnableScheduling
+@Profile("database")
 @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true)
 class Scheduler {
 
@@ -23,8 +25,8 @@ class Scheduler {
         this.reportService = reportService;
     }
 
-    @Scheduled(cron = "0 0 0-23 * * *")
+    @Scheduled(cron = "${report.generation.frequency}" )
     private void generateReport() throws IOException {
-        reportService.generateScheduledReport(LocalDateTime.now().minusHours(interval), LocalDateTime.now());
+        reportService.generateReport(LocalDateTime.now().minusHours(interval), LocalDateTime.now());
     }
 }

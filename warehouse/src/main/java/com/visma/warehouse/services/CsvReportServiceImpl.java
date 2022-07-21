@@ -17,9 +17,9 @@ public class CsvReportServiceImpl implements ReportService {
 
     private ShopProductRepository shopProductRepository;
 
-    private FileService fileService;
+    private ReportFileService reportFileService;
 
-    public void generateScheduledReport(LocalDateTime startDate, LocalDateTime endDate) throws IOException {
+    public void generateReport(LocalDateTime startDate, LocalDateTime endDate) throws IOException {
 
         if(startDate.isAfter(endDate)){
             throw new IllegalArgumentException("Starting date is after ending date!");
@@ -30,6 +30,6 @@ public class CsvReportServiceImpl implements ReportService {
                         startDate.truncatedTo(ChronoUnit.HOURS),
                         endDate.truncatedTo(ChronoUnit.HOURS));
 
-        fileService.createFile(shoppingHistory);
+        reportFileService.createFile(shoppingHistory);
     }
 }
