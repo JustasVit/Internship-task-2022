@@ -3,25 +3,26 @@ package com.visma.shop.controllers;
 import com.visma.shop.services.WarehouseService;
 import com.visma.warehousedto.dto.ProductDto;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
+@RequestMapping("/shop")
 @AllArgsConstructor
-@RequestMapping("/api/shop")
 public class ShopController {
 
     private WarehouseService warehouseService;
 
-    @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllProducts(){
-        return ResponseEntity.ok(warehouseService.getAllProducts());
+    @GetMapping("/products")
+    public ModelAndView getAllProducts(){
+        ModelAndView modelAndView = new ModelAndView("product-list");
+        List<ProductDto> products = warehouseService.getAllProducts();
+        modelAndView.addObject("products", products);
+        return  modelAndView;
     }
 
-    @PostMapping("/product/{id}/sell/{quantity}")
-    public ResponseEntity<ProductDto> buyProduct(@PathVariable long id, @PathVariable int quantity){
-        return ResponseEntity.ok(warehouseService.buyProduct(id, quantity));
-    }
 }

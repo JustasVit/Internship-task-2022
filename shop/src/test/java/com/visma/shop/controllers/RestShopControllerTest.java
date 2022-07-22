@@ -16,8 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ShopController.class)
-public class ShopControllerTest {
+@WebMvcTest(RestShopController.class)
+public class RestShopControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
