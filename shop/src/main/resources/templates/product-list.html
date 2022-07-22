@@ -17,6 +17,7 @@
                         <th>Description</th>
                         <th>Price</th>
                         <th>Quantity</th>
+                        <th/>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +27,14 @@
                         <td th:text="${product.description}"></td>
                         <td th:text="${product.price}"></td>
                         <td th:text="${product.quantity}"></td>
-
+                        <td>
+                            <form th:action="@{/shop/product/buy/{id}(id=${product.id})}" method="POST">
+                            <div class="input-group">
+                                <input type="number" min="0" th:max="${product.quantity}" th:value="${quantity}" name="quantity" class="form-control col-4">
+                                <button class="btn btn-outline-primary" type="submit">Buy</button>
+                            </div>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

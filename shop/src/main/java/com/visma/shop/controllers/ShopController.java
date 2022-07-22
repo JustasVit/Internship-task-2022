@@ -4,8 +4,7 @@ import com.visma.shop.services.WarehouseService;
 import com.visma.warehousedto.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,6 +22,12 @@ public class ShopController {
         List<ProductDto> products = warehouseService.getAllProducts();
         modelAndView.addObject("products", products);
         return  modelAndView;
+    }
+
+    @PostMapping("/product/buy/{id}")
+    public String buyProductPost(@PathVariable Long id, @RequestParam int quantity){
+        warehouseService.buyProduct(id, quantity);
+        return "redirect:/shop/products";
     }
 
 }
