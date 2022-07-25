@@ -3,8 +3,11 @@
 <head>
     <title>Product list</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/datatables/1.11.4/css/jquery.dataTables.css" />
     <link th:href="@{/styles/products.css}" rel="stylesheet" />
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/datatables/1.11.4/js/jquery.dataTables.js"></script>
+    <script th:src="@{/js/datatable.js}"></script>
 </head>
 
 <body>
@@ -16,7 +19,6 @@
             <table class="table table-sm table-bordered table-striped" id="products-table">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Price</th>
@@ -26,7 +28,6 @@
                 </thead>
                 <tbody>
                 <tr th:each="product:${products}">
-                    <td th:text="${product.id}"></td>
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.description}"></td>
                     <td th:text="${product.price}"></td>
@@ -47,17 +48,4 @@
     </div>
 </div>
 </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
-    <script>
-        $(document).ready(function (){
-            $("#products-table").DataTable({
-                'aoColumnDefs': [{
-                    'bSortable': false,
-                    'aTargets': [-1]
-                }]
-            });
-        })
-    </script>
-
 </html>

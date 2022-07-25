@@ -31,8 +31,9 @@ public class ShopController {
 
     @GetMapping("/report/csv")
     public ResponseEntity<Resource> getReport() {
-        Resource resource = warehouseService.getReport(LocalDateTime.now());
-        String filename = String.format("%s.csv",LocalDateTime.now().truncatedTo(ChronoUnit.HOURS));
+        LocalDateTime dateTime = LocalDateTime.now();
+        Resource resource = warehouseService.getReport(dateTime);
+        String filename = String.format("%s.csv",dateTime.truncatedTo(ChronoUnit.HOURS));
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
