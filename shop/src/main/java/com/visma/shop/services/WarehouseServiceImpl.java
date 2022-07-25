@@ -2,10 +2,18 @@ package com.visma.shop.services;
 
 import com.visma.warehousedto.dto.ProductDto;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import javax.annotation.PostConstruct;
+import org.springframework.core.io.Resource;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +34,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @PostConstruct
     public void init(){
         restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(warehouseBaseUrl));
+        restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
     }
 
     public List<ProductDto> getAllProducts() {
@@ -33,6 +42,14 @@ public class WarehouseServiceImpl implements WarehouseService {
                 restTemplate.getForObject(
                         "/api/products",
                         ProductDto[].class));
+    }
+
+    public Resource getReport(LocalDateTime date){
+        Map<String, String> variables = new HashMap<>();
+        variables.put("date", date.truncatedTo(ChronoUnit.HOURS).format(DateTimeFormatter.ofPattern("yyyy.MM.dd'T'HH")));
+        return restTemplate.getForObject("/api/report/csv/{date}",
+                Resource.class,
+                variables);
     }
 
     public ProductDto buyProduct(long id, int quantity) {

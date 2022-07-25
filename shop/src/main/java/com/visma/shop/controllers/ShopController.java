@@ -3,25 +3,48 @@ package com.visma.shop.controllers;
 import com.visma.shop.services.WarehouseService;
 import com.visma.warehousedto.dto.ProductDto;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.servlet.ModelAndView;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-@RestController
+@Controller
+@RequestMapping("/shop")
 @AllArgsConstructor
-@RequestMapping("/api/shop")
 public class ShopController {
 
     private WarehouseService warehouseService;
 
-    @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllProducts(){
-        return ResponseEntity.ok(warehouseService.getAllProducts());
+    @GetMapping("/products")
+    public ModelAndView getAllProducts(){
+        ModelAndView modelAndView = new ModelAndView("product-list");
+        List<ProductDto> products = warehouseService.getAllProducts();
+        modelAndView.addObject("products", products);
+        return  modelAndView;
     }
 
-    @PostMapping("/product/{id}/sell/{quantity}")
-    public ResponseEntity<ProductDto> buyProduct(@PathVariable long id, @PathVariable int quantity){
-        return ResponseEntity.ok(warehouseService.buyProduct(id, quantity));
+    @GetMapping("/report/csv")
+    public ResponseEntity<Resource> getReport() {
+        LocalDateTime dateTime = LocalDateTime.now();
+        Resource resource = warehouseService.getReport(dateTime);
+        String filename = String.format("%s.csv",dateTime.truncatedTo(ChronoUnit.HOURS));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/csv"))
+                .body(resource);
     }
+
+    @PostMapping("/product/buy/{id}")
+    public String buyProductPost(@PathVariable Long id, @RequestParam int quantity){
+        warehouseService.buyProduct(id, quantity);
+        return "redirect:/shop/products";
+    }
+
 }

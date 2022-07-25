@@ -1,0 +1,51 @@
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <title>Product list</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/datatables/1.11.4/css/jquery.dataTables.css" />
+    <link th:href="@{/styles/products.css}" rel="stylesheet" />
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/datatables/1.11.4/js/jquery.dataTables.js"></script>
+    <script th:src="@{/js/datatable.js}"></script>
+</head>
+
+<body>
+<div class="container">
+    <h2>Product list <a th:href="@{/shop/report/csv}" class="btn btn-success">Download latest report</a> </h2>
+    <hr/>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <table class="table table-sm table-bordered table-striped" id="products-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product:${products}">
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td>
+                        <form th:action="@{/shop/product/buy/{id}(id=${product.id})}" method="POST" id="productForm">
+                            <div class="input-group">
+                                <div class="col-xs-2">
+                                    <input type="number" min="0" th:max="${product.quantity}" th:value="${quantity}" name="quantity" class="form-control col-4"> </div>
+                                <button class="btn btn-outline-primary" type="submit">Buy</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
