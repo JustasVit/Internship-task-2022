@@ -1,48 +1,52 @@
 <html xmlns="http://www.thymeleaf.org">
 
-    <head>
-        <title>Product list</title>
-        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
-    </head>
+<head>
+    <title>Product list</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
+    <link th:href="@{/styles/products.css}" rel="stylesheet" />
+</head>
 
-    <body>
-        <div class="container">
-            <h2>Product list</h2>
-            <hr/>
+<body>
+<div class="container">
+    <h2>Product list <a th:href="@{/shop/report/csv}" class="btn btn-success">Download latest report</a> </h2>
+    <hr/>
+    <div class="row justify-content-center">
+        <div class="col-auto">
             <table class="table table-sm table-bordered table-striped" id="products-table">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th/>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="product:${products}">
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.description}"></td>
-                        <td th:text="${product.price}"></td>
-                        <td th:text="${product.quantity}"></td>
-                        <td>
-                            <form th:action="@{/shop/product/buy/{id}(id=${product.id})}" method="POST">
+                <tr th:each="product:${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td>
+                        <form th:action="@{/shop/product/buy/{id}(id=${product.id})}" method="POST" id="productForm">
                             <div class="input-group">
                                 <div class="col-xs-2">
-                                <input type="number" min="0" th:max="${product.quantity}" th:value="${quantity}" name="quantity" class="form-control col-4">
-                                </div>
+                                    <input type="number" min="0" th:max="${product.quantity}" th:value="${quantity}" name="quantity" class="form-control col-4"> </div>
                                 <button class="btn btn-outline-primary" type="submit">Buy</button>
                             </div>
-                            </form>
-                        </td>
-                    </tr>
+                        </form>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
-    </body>
+    </div>
+</div>
+</body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
     <script>
